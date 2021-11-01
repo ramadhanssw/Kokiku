@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kokiku/authentication/registerscreen.dart';
-import 'package:kokiku/widgets/mainpage.dart';
+import 'package:kokiku/ui/mainpage.dart';
+import 'package:kokiku/check_internet.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,6 +13,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternet().checkConnection(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text(
                 "Kokiku",
                 style: TextStyle(
-                  color: Colors.blue[900],
+                  color: Color(0xFF1A244C),
                   fontWeight: FontWeight.w500,
                   fontSize: 30,
                 ),
@@ -74,17 +81,93 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: raisedButtonStyle,
                 child: Text("Login"),
                 onPressed: () async {
-                  await _firebaseAuth
-                      .signInWithEmailAndPassword(
-                          email: _emailController.text,
-                          password: _passwordController.text)
-                      .then(
-                        (value) => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => MainPage(),
+                  checkInternet().checkConnection(context);
+                  if (_emailController.text.isNotEmpty) {
+                    if (_passwordController.text.isNotEmpty) {
+                      if (_passwordController.text.length < 8) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text("False Password"),
+                            content: Text(
+                                "Please input your password more than 8 characters!"),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text("Ok"),
+                                onPressed: () {
+                                  Navigator.of(context).pop("Ok");
+                                },
+                              ),
+                            ],
                           ),
+                        );
+                      } else {
+                        try {
+                          await _firebaseAuth
+                              .signInWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text)
+                              .then(
+                                (value) =>
+                                    Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => MainPage(),
+                                  ),
+                                ),
+                              );
+                        } catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text("Login Problem"),
+                              content: Text(
+                                  "Please input your email and password correctly!"),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text("Ok"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop("Ok");
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      }
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Blank Password"),
+                          content: Text("Please input your password!"),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text("Ok"),
+                              onPressed: () {
+                                Navigator.of(context).pop("Ok");
+                              },
+                            ),
+                          ],
                         ),
                       );
+                    }
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Blank Email"),
+                        content: Text("Please input your email!"),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.of(context).pop("Ok");
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
               ),
             ),
