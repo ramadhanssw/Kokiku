@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:kokiku/data/api/api_service.dart';
 import 'package:kokiku/data/model/list.dart';
 import 'package:flutter/material.dart';
-
-enum ResultState { Loading, NoData, HasData, Error }
+import 'package:kokiku/utils/result_state.dart';
 
 class RestaurantProvider extends ChangeNotifier {
   final ApiService apiService;

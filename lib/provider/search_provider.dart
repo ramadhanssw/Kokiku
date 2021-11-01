@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:kokiku/data/api/api_service.dart';
 import 'package:kokiku/data/model/search.dart';
 import 'package:flutter/material.dart';
-
-enum ResultState { Loading, NoData, HasData, Error }
+import 'package:kokiku/utils/result_state.dart';
 
 class SearchProvider extends ChangeNotifier {
   final ApiService apiService;

@@ -4,6 +4,8 @@ import 'package:kokiku/ui/mainpage.dart';
 import 'package:kokiku/check_internet.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -23,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
             Container(
@@ -39,8 +41,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-              child: Text(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              child: const Text(
                 "Kokiku",
                 style: TextStyle(
                   color: Color(0xFF1A244C),
@@ -50,35 +52,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Email",
                 ),
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Password",
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
               height: 50,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 style: raisedButtonStyle,
-                child: Text("Register"),
+                child: const Text("Register"),
                 onPressed: () async {
                   checkInternet().checkConnection(context);
                   if (_emailController.text.isNotEmpty) {
@@ -87,12 +89,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text("Weak Password"),
-                            content: Text(
+                            title: const Text("Weak Password"),
+                            content: const Text(
                                 "Please input your password more than 8 characters!"),
                             actions: <Widget>[
                               TextButton(
-                                child: Text("Ok"),
+                                child: const Text("Ok"),
                                 onPressed: () {
                                   Navigator.of(context).pop("Ok");
                                 },
@@ -110,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 (value) =>
                                     Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => const MainPage(),
                                   ),
                                 ),
                               );
@@ -118,12 +120,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: Text("Register Problem"),
-                              content: Text(
+                              title: const Text("Register Problem"),
+                              content: const Text(
                                   "Please input your email and password correctly!"),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text("Ok"),
+                                  child: const Text("Ok"),
                                   onPressed: () {
                                     Navigator.of(context).pop("Ok");
                                   },
@@ -137,11 +139,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text("Blank Password"),
-                          content: Text("Please input your password!"),
+                          title: const Text("Blank Password"),
+                          content: const Text("Please input your password!"),
                           actions: <Widget>[
                             TextButton(
-                              child: Text("Ok"),
+                              child: const Text("Ok"),
                               onPressed: () {
                                 Navigator.of(context).pop("Ok");
                               },
@@ -154,11 +156,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text("Blank Email"),
-                        content: Text("Please input your email!"),
+                        title: const Text("Blank Email"),
+                        content: const Text("Please input your email!"),
                         actions: <Widget>[
                           TextButton(
-                            child: Text("Ok"),
+                            child: const Text("Ok"),
                             onPressed: () {
                               Navigator.of(context).pop("Ok");
                             },
@@ -170,7 +172,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -184,10 +186,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Container(
               height: 50,
-              padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: ElevatedButton(
                 style: raisedButtonStyle,
-                child: Text("Sign In"),
+                child: const Text("Sign In"),
                 onPressed: () async {
                   Navigator.pop(context);
                 },
@@ -203,8 +205,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
   onPrimary: Colors.white,
   primary: Colors.blue[900],
-  minimumSize: Size(88, 36),
-  padding: EdgeInsets.symmetric(horizontal: 16),
+  minimumSize: const Size(88, 36),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
   shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(6)),
   ),

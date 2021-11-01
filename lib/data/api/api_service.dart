@@ -5,7 +5,7 @@ import 'package:kokiku/data/model/list.dart';
 import 'package:kokiku/data/model/search.dart';
 
 class ApiService {
-  static final String _baseUrl = 'https://restaurant-api.dicoding.dev';
+  static const String _baseUrl = 'https://restaurant-api.dicoding.dev';
 
   Future<RestaurantList> ListModel() async {
     final response = await http.get(Uri.parse(_baseUrl + "/list"));

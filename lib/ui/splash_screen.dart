@@ -4,6 +4,8 @@ import 'package:kokiku/check_internet.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -13,9 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     checkInternet().checkConnection(context);
-    Timer(Duration(seconds: 3), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
+    Timer(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const LoginScreen()));
     });
   }
 
@@ -31,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
               'assets/img/kokiku.jpg',
               height: 120,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CircularProgressIndicator(

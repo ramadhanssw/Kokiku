@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:kokiku/data/api/api_service.dart';
 
 class CardSearch extends StatelessWidget {
-  final Restaurant restaurant;
+  final Restaurant_Search restaurant;
 
   const CardSearch({required this.restaurant});
 
@@ -21,7 +21,7 @@ class CardSearch extends StatelessWidget {
               builder: (context) => ChangeNotifierProvider<ContentProvider>(
                 create: (_) =>
                     ContentProvider(restaurant.id, apiService: ApiService()),
-                child: ContentPage(),
+                child: const ContentPage(),
               ),
             ),
           );
@@ -38,13 +38,13 @@ class CardSearch extends StatelessWidget {
                   InkWell(
                     child: Text(
                       restaurant.name,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 22),
                     ),
                   ),
                   Row(
                     children: [
-                      Icon(Icons.location_city_outlined),
+                      const Icon(Icons.location_city_outlined),
                       Text(
                         restaurant.city,
                         style: TextStyle(color: Colors.grey.shade600),
@@ -53,7 +53,7 @@ class CardSearch extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.star),
+                      const Icon(Icons.star),
                       Text(
                         restaurant.rating.toString(),
                         style: TextStyle(color: Colors.grey.shade600),

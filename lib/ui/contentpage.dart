@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kokiku/utils/result_state.dart';
 import 'package:provider/provider.dart';
 import 'package:kokiku/provider/content_provider.dart';
 import 'package:kokiku/widgets/content_widget.dart';
@@ -13,25 +14,24 @@ class ContentPage extends StatelessWidget {
     return Consumer<ContentProvider>(
       builder: (context, state, _) {
         if (state.state == ResultState.Loading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state.state == ResultState.HasData) {
-          return Container(
-            child: ContentWidget(restaurant: state.result.restaurant),
-          );
+          return ContentWidget(restaurant: state.result.restaurant);
         } else if (state.state == ResultState.NoData) {
           state.fetchContentArticle();
           return Scaffold(
               backgroundColor: Colors.white,
               body: Stack(
                 children: [
-                  Center(
+                  Align(
+                    alignment: Alignment.center,
                     child: Column(
                       children: [
                         Image.asset(
                           'assets/img/datanotfound.png',
-                          height: 60,
+                          width: MediaQuery.of(context).size.width * 0.5,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -46,16 +46,16 @@ class ContentPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30.0),
+                    padding: const EdgeInsets.only(top: 30.0),
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back),
+                      child: const Icon(Icons.arrow_back),
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all(CircleBorder()),
-                        padding:
-                            MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                        shape: MaterialStateProperty.all(const CircleBorder()),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.all(10.0)),
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[900]),
                       ),
@@ -69,14 +69,15 @@ class ContentPage extends StatelessWidget {
               backgroundColor: Colors.white,
               body: Stack(
                 children: [
-                  Center(
+                  Align(
+                    alignment: Alignment.center,
                     child: Column(
                       children: [
                         Image.asset(
                           'assets/img/internetproblem.png',
-                          height: 60,
+                          width: MediaQuery.of(context).size.width * 0.5,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -92,16 +93,16 @@ class ContentPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30.0),
+                    padding: const EdgeInsets.only(top: 30.0),
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back),
+                      child: const Icon(Icons.arrow_back),
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all(CircleBorder()),
-                        padding:
-                            MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                        shape: MaterialStateProperty.all(const CircleBorder()),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.all(10.0)),
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[900]),
                       ),
@@ -110,7 +111,7 @@ class ContentPage extends StatelessWidget {
                 ],
               ));
         } else {
-          return Center(child: Text(''));
+          return const Center(child: Text(''));
         }
       },
     );

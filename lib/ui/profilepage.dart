@@ -2,8 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kokiku/authentication/loginscreen.dart';
+import 'package:provider/provider.dart';
+import 'package:kokiku/provider/schedulling_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -21,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Color(0xFF1A244C),
+        backgroundColor: const Color(0xFF1A244C),
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -39,25 +43,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 height: 400,
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
+                    ),
+                    Material(
+                      child: ListTile(
+                        title: const Text('Scheduling Recommendation'),
+                        trailing: Consumer<SchedulingProvider>(
+                          builder: (context, scheduled, _) {
+                            return Switch.adaptive(
+                              value: scheduled.isScheduled,
+                              onChanged: (value) async {
+                                scheduled.scheduledNews(value);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     Text(
                       "Your Logged as \n${currentUser!.email}",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Color(0xFF1A244C),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       "Are you want to change password?",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -68,10 +90,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     Container(
                       height: 50,
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                       child: ElevatedButton(
                         style: raisedButtonStyle,
-                        child: Text("Update Password"),
+                        child: const Text("Update Password"),
                         onPressed: () async {
                           if (currentUser!.email!.isNotEmpty) {
                             await _firebaseAuth.sendPasswordResetEmail(
@@ -79,12 +101,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: Text("Update Password"),
+                                title: const Text("Update Password"),
                                 content: Text(
                                     "Already sent to ${currentUser!.email} \nCheck your email"),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: Text("Ok"),
+                                    child: const Text("Ok"),
                                     onPressed: () {
                                       Navigator.of(context).pop("Ok");
                                     },
@@ -96,11 +118,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: Text("Error"),
-                                content: Text("There is an error"),
+                                title: const Text("Error"),
+                                content: const Text("There is an error"),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: Text("Ok"),
+                                    child: const Text("Ok"),
                                     onPressed: () {
                                       Navigator.of(context).pop("Ok");
                                     },
@@ -112,10 +134,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Text(
+                    const Text(
                       "Change Account",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -126,14 +148,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     Container(
                       height: 50,
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                       child: ElevatedButton(
                         style: raisedButtonStyle,
-                        child: Text("Logout"),
+                        child: const Text("Logout"),
                         onPressed: () {
                           _SignOut().then((value) => Navigator.of(context)
                               .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => LoginScreen())));
+                                  builder: (context) => const LoginScreen())));
                         },
                       ),
                     ),
@@ -145,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
                   "Profile Account",
@@ -158,14 +180,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 width: MediaQuery.of(context).size.width / 2,
                 height: MediaQuery.of(context).size.width / 2,
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.white, width: 5),
                     shape: BoxShape.circle,
                     color: Colors.white,
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage('assets/img/kokiku.jpg'),
                     )),
@@ -181,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 class HeaderCurvedContainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Color(0xFF1A244C);
+    Paint paint = Paint()..color = const Color(0xFF1A244C);
     Path path = Path()
       ..relativeLineTo(0, 150)
       ..quadraticBezierTo(size.width / 2, 225, size.width, 150)
@@ -197,8 +219,8 @@ class HeaderCurvedContainer extends CustomPainter {
 final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
   onPrimary: Colors.white,
   primary: Colors.blue[900],
-  minimumSize: Size(88, 36),
-  padding: EdgeInsets.symmetric(horizontal: 16),
+  minimumSize: const Size(88, 36),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
   shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(6)),
   ),

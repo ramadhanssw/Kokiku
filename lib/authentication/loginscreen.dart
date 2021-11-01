@@ -5,6 +5,8 @@ import 'package:kokiku/ui/mainpage.dart';
 import 'package:kokiku/check_internet.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -24,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
             Container(
@@ -40,8 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-              child: Text(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              child: const Text(
                 "Kokiku",
                 style: TextStyle(
                   color: Color(0xFF1A244C),
@@ -51,35 +53,35 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Email",
                 ),
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Password",
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
               height: 50,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 style: raisedButtonStyle,
-                child: Text("Login"),
+                child: const Text("Login"),
                 onPressed: () async {
                   checkInternet().checkConnection(context);
                   if (_emailController.text.isNotEmpty) {
@@ -88,12 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text("False Password"),
-                            content: Text(
+                            title: const Text("False Password"),
+                            content: const Text(
                                 "Please input your password more than 8 characters!"),
                             actions: <Widget>[
                               TextButton(
-                                child: Text("Ok"),
+                                child: const Text("Ok"),
                                 onPressed: () {
                                   Navigator.of(context).pop("Ok");
                                 },
@@ -111,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 (value) =>
                                     Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => const MainPage(),
                                   ),
                                 ),
                               );
@@ -119,12 +121,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: Text("Login Problem"),
-                              content: Text(
+                              title: const Text("Login Problem"),
+                              content: const Text(
                                   "Please input your email and password correctly!"),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text("Ok"),
+                                  child: const Text("Ok"),
                                   onPressed: () {
                                     Navigator.of(context).pop("Ok");
                                   },
@@ -138,11 +140,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text("Blank Password"),
-                          content: Text("Please input your password!"),
+                          title: const Text("Blank Password"),
+                          content: const Text("Please input your password!"),
                           actions: <Widget>[
                             TextButton(
-                              child: Text("Ok"),
+                              child: const Text("Ok"),
                               onPressed: () {
                                 Navigator.of(context).pop("Ok");
                               },
@@ -155,11 +157,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text("Blank Email"),
-                        content: Text("Please input your email!"),
+                        title: const Text("Blank Email"),
+                        content: const Text("Please input your email!"),
                         actions: <Widget>[
                           TextButton(
-                            child: Text("Ok"),
+                            child: const Text("Ok"),
                             onPressed: () {
                               Navigator.of(context).pop("Ok");
                             },
@@ -179,12 +181,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text("Forgot Password"),
+                      title: const Text("Forgot Password"),
                       content: Text(
                           "Reset password already sent to Email: ${_emailController.text}"),
                       actions: <Widget>[
                         TextButton(
-                          child: Text("Ok"),
+                          child: const Text("Ok"),
                           onPressed: () {
                             Navigator.of(context).pop("Ok");
                           },
@@ -196,12 +198,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text("Forgot Password"),
-                      content:
-                          Text("Please input your email to reset password"),
+                      title: const Text("Forgot Password"),
+                      content: const Text(
+                          "Please input your email to reset password"),
                       actions: <Widget>[
                         TextButton(
-                          child: Text("Ok"),
+                          child: const Text("Ok"),
                           onPressed: () {
                             Navigator.of(context).pop("Ok");
                           },
@@ -211,9 +213,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 }
               },
-              child: Text("Forgot Password"),
+              child: const Text("Forgot Password"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -227,15 +229,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               height: 50,
-              padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: ElevatedButton(
                 style: raisedButtonStyle,
-                child: Text("Sign Up"),
+                child: const Text("Sign Up"),
                 onPressed: () async {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => RegisterScreen()));
+                          builder: (context) => const RegisterScreen()));
                 },
               ),
             ),
@@ -249,8 +251,8 @@ class _LoginScreenState extends State<LoginScreen> {
 final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
   onPrimary: Colors.white,
   primary: Colors.blue[900],
-  minimumSize: Size(88, 36),
-  padding: EdgeInsets.symmetric(horizontal: 16),
+  minimumSize: const Size(88, 36),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
   shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(6)),
   ),

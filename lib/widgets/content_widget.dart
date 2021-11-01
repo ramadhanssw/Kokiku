@@ -2,199 +2,195 @@ import 'package:kokiku/data/model/content.dart';
 import 'package:flutter/material.dart';
 
 class ContentWidget extends StatelessWidget {
-  final Restaurant restaurant;
+  final Restaurant_Content restaurant;
 
-  const ContentWidget({required this.restaurant});
+  ContentWidget({Key? key, required this.restaurant}) : super(key: key);
+
+  bool favoriteButton = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Hero(
-                      tag: restaurant.name,
-                      child: Image.network(
-                        'https://restaurant-api.dicoding.dev/images/medium/' +
-                            restaurant.pictureId,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: 200,
-                        alignment: Alignment.center,
-                      )),
-                  SizedBox(
-                    height: 10.0,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Hero(
+                  tag: restaurant.name,
+                  child: Image.network(
+                    'https://restaurant-api.dicoding.dev/images/medium/' +
+                        restaurant.pictureId,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 200,
+                    alignment: Alignment.center,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          restaurant.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
-                          ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        restaurant.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30.0,
                         ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Icon(Icons.location_city_outlined),
-                                  SizedBox(height: 8.0),
-                                  Text(
-                                    restaurant.city,
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Icon(Icons.star),
-                                  SizedBox(height: 8.0),
-                                  Text(
-                                    restaurant.rating.toString(),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Icon(Icons.restaurant),
-                                  SizedBox(height: 8.0),
-                                  Text(
-                                    Categories(restaurant.categories),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          child: Text(
-                            'Description',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                const Icon(Icons.location_city_outlined),
+                                const SizedBox(height: 8.0),
+                                Text(
+                                  restaurant.city,
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            restaurant.description,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16.0,
+                            Column(
+                              children: <Widget>[
+                                const Icon(Icons.star),
+                                const SizedBox(height: 8.0),
+                                Text(
+                                  restaurant.rating.toString(),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          child: Text(
-                            'Foods',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
+                            Column(
+                              children: <Widget>[
+                                const Icon(Icons.restaurant),
+                                const SizedBox(height: 8.0),
+                                Text(
+                                  Categories(restaurant.categories),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      const Text(
+                        'Description',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          restaurant.description,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 16.0,
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            printName(restaurant.menus.foods),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      const Text(
+                        'Foods',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          printName(restaurant.menus.foods),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 16.0,
                           ),
                         ),
-                        SizedBox(
-                          height: 15.0,
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      const Text(
+                        'Drinks',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Container(
-                          child: Text(
-                            'Drinks',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          printName(restaurant.menus.drinks),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 16.0,
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            printName(restaurant.menus.drinks),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      const Text(
+                        'Review',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          Review(restaurant.customerReviews),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 16.0,
                           ),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          child: Text(
-                            'Review',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            Review(restaurant.customerReviews),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 30.0),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 1.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Icon(Icons.arrow_back),
+                child: const Icon(Icons.arrow_back),
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(CircleBorder()),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                  shape: MaterialStateProperty.all(const CircleBorder()),
+                  padding:
+                      MaterialStateProperty.all(const EdgeInsets.all(10.0)),
                   backgroundColor: MaterialStateProperty.all(Colors.blue[900]),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

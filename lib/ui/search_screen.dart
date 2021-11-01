@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kokiku/utils/result_state.dart';
 import 'package:kokiku/widgets/card_search.dart';
 import 'package:provider/provider.dart';
 import 'package:kokiku/provider/search_provider.dart';
@@ -13,7 +14,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String queries = '';
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   Widget _listSearchRestaurants(BuildContext context) {
     return ChangeNotifierProvider<SearchProvider>(
@@ -23,11 +24,11 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Consumer<SearchProvider>(
         builder: (context, state, _) {
           if (state.state == ResultState.Loading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state.state == ResultState.HasData) {
             state.fetchAllArticle(queries);
             return Container(
-                margin: EdgeInsets.only(left: 5, right: 5),
+                margin: const EdgeInsets.only(left: 5, right: 5),
                 height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -39,17 +40,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 ));
           } else if (state.state == ResultState.NoData) {
             state.fetchAllArticle(queries);
-            return Center(
+            return Align(
+              alignment: Alignment.center,
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15,
-                  ),
                   Image.asset(
                     'assets/img/datanotfound.png',
-                    height: 60,
+                    width: MediaQuery.of(context).size.width * 0.5,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -65,17 +64,15 @@ class _SearchScreenState extends State<SearchScreen> {
             );
           } else if (state.state == ResultState.Error) {
             state.fetchAllArticle(queries);
-            return Center(
+            return Align(
+              alignment: Alignment.center,
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15,
-                  ),
                   Image.asset(
                     'assets/img/internetproblem.png',
-                    height: 30,
+                    width: MediaQuery.of(context).size.width * 0.5,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -91,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             );
           } else {
-            return Center(child: Text(''));
+            return const Center(child: Text(''));
           }
         },
       ),
@@ -104,7 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           ChangeNotifierProvider(
@@ -112,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Consumer<SearchProvider>(
               builder: (context, state, _) {
                 return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
                     decoration: BoxDecoration(
                       color: Colors.white60,
                       borderRadius: BorderRadius.circular(30),
@@ -121,12 +118,12 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
                           blurRadius: 3,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
                     child: ListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.search,
                           size: 30,
                         ),
@@ -141,7 +138,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             }
                           },
                           cursorColor: Colors.black,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Let's find the restaurant!",
                               border: InputBorder.none),
                         ),
@@ -156,12 +153,12 @@ class _SearchScreenState extends State<SearchScreen> {
                               });
                             }
                           },
-                          icon: Icon(Icons.close, size: 30),
+                          icon: const Icon(Icons.close, size: 30),
                         )));
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(

@@ -12,14 +12,14 @@ class checkInternet {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-              title: new Text("Connection Status"),
-              content: new Text(content),
+              title: const Text("Connection Status"),
+              content: Text(content),
               actions: <Widget>[
-                new FlatButton(
+                FlatButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: new Text("Close"))
+                    child: const Text("Close"))
               ]);
         });
   }

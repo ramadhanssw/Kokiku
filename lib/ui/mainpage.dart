@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kokiku/data/api/api_service.dart';
+import 'package:kokiku/ui/favorite_screen.dart';
 import 'package:kokiku/ui/profilepage.dart';
 import 'package:kokiku/ui/explore_screen.dart';
 import 'package:kokiku/ui/search_screen.dart';
 import 'package:kokiku/check_internet.dart';
-import 'package:provider/provider.dart';
-import 'package:kokiku/provider/restaurant_provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,9 +14,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
-  List<Tab> _categories = [
-    Tab(child: Text('Explore')),
-    Tab(child: Text('Search')),
+  final List<Tab> _categories = [
+    const Tab(child: Text('Explore')),
+    const Tab(child: Text('Search')),
+    const Tab(child: Text('Favorite')),
   ];
 
   late TabController _tabController;
@@ -41,11 +40,11 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: const Size.fromHeight(100.0),
         child: AppBar(
-          backgroundColor: Color(0xFF1A244C),
+          backgroundColor: const Color(0xFF1A244C),
           title: Row(
-            children: [
+            children: const [
               Icon(Icons.restaurant_menu),
               Text(
                 "Kokiku",
@@ -55,7 +54,7 @@ class _MainPageState extends State<MainPage>
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.account_circle,
                 color: Colors.white,
               ),
@@ -63,7 +62,7 @@ class _MainPageState extends State<MainPage>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfileScreen(),
+                    builder: (context) => const ProfileScreen(),
                   ),
                 );
               },
@@ -75,17 +74,15 @@ class _MainPageState extends State<MainPage>
               controller: _tabController,
               isScrollable: true,
             ),
-            preferredSize: Size.fromHeight(30.0),
+            preferredSize: const Size.fromHeight(30.0),
           ),
         ),
       ),
       body: TabBarView(
-        children: [
-          ChangeNotifierProvider<RestaurantProvider>(
-            create: (_) => RestaurantProvider(apiService: ApiService()),
-            child: RestaurantListPage(),
-          ),
+        children: const [
+          RestaurantListPage(),
           SearchScreen(),
+          FavoriteScreen(),
         ],
         controller: _tabController,
       ),

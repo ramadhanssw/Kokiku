@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:kokiku/data/api/api_service.dart';
 import 'package:kokiku/data/model/content.dart';
 import 'package:flutter/material.dart';
-
-enum ResultState { Loading, NoData, HasData, Error }
+import 'package:kokiku/utils/result_state.dart';
 
 class ContentProvider extends ChangeNotifier {
   final ApiService apiService;

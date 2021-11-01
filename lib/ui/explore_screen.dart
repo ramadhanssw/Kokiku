@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kokiku/utils/result_state.dart';
 import 'package:kokiku/widgets/card_list.dart';
 import 'package:provider/provider.dart';
 import 'package:kokiku/provider/restaurant_provider.dart';
@@ -11,7 +12,7 @@ class RestaurantListPage extends StatelessWidget {
     return Consumer<RestaurantProvider>(
       builder: (context, state, _) {
         if (state.state == ResultState.Loading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state.state == ResultState.HasData) {
           return ListView.builder(
             shrinkWrap: true,
@@ -25,17 +26,15 @@ class RestaurantListPage extends StatelessWidget {
           );
         } else if (state.state == ResultState.NoData) {
           state.fetchAllArticle();
-          return Center(
+          return Align(
+            alignment: Alignment.center,
             child: Column(
               children: [
-                SizedBox(
-                  height: 15,
-                ),
                 Image.asset(
                   'assets/img/datanotfound.png',
-                  height: 60,
+                  width: MediaQuery.of(context).size.width * 0.5,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -51,17 +50,15 @@ class RestaurantListPage extends StatelessWidget {
           );
         } else if (state.state == ResultState.Error) {
           state.fetchAllArticle();
-          return Center(
+          return Align(
+            alignment: Alignment.center,
             child: Column(
               children: [
-                SizedBox(
-                  height: 15,
-                ),
                 Image.asset(
                   'assets/img/internetproblem.png',
-                  height: 30,
+                  width: MediaQuery.of(context).size.width * 0.5,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -77,7 +74,7 @@ class RestaurantListPage extends StatelessWidget {
             ),
           );
         } else {
-          return Center(child: Text(''));
+          return const Center(child: Text(''));
         }
       },
     );
