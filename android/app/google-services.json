@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "388318489115",
+    "project_id": "kokiku-auth",
+    "storage_bucket": "kokiku-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388318489115:android:cd8647e3ea2cfd395ea6be",
+        "android_client_info": {
+          "package_name": "com.example.kokiku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388318489115-60qp1qt0ld1jioi459h45hgup9f5usmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNmqVaP6lMZgj_g50dAf6dUr7b5yhbzpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388318489115-60qp1qt0ld1jioi459h45hgup9f5usmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
